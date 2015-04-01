@@ -77,7 +77,7 @@ session_start();
         $_SESSION['nb'] = 0;
         $_SESSION['message'] = '';
         $_SESSION['id'] = -1;
-
+    }
     //Bouton de retweet est appuyé
     if(isset($_GET['action'])){
         $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
