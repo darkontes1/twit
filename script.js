@@ -2,9 +2,7 @@ $("body").find("#container").children("form").attr("action","#");
 
 //Quand on va cliquer sur le bouton de connexion
 $(document).on("click","#co",function(){
-    alert("toto");
     var tata = $("#valueCo").val();
-    console.log(tata);
     $.ajax({
         method:"POST",
         url:"index_pdo.php",
