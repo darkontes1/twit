@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+
 <?php
 //session_start();
 //session_destroy();
@@ -111,6 +118,7 @@ session_start();
         }      
     }
 ?>
+<div id="container">
 <form method="post" action="index_pdo.php">
     <?php
     if($_SESSION['connect']==FALSE){
@@ -118,7 +126,7 @@ session_start();
         echo '<input type="submit" name="co" value="connection"/>';
     }
     if($_SESSION['connect']==TRUE){
-        echo '<h2>connecté sous : '.$_SESSION['login'].'</h2><br/>';
+        echo '<h2>Connecté sous : '.$_SESSION['login'].'</h2><br/>';
         echo '<input type="submit" name="deco" value="deconnection"/>';
     }
     ?>
@@ -254,3 +262,6 @@ session_start();
         echo $row->loginUser." ".$row->nomUser." ".$row->messageTwit."<br/>";
     }*/
 ?>
+</div>
+</body>
+</html>

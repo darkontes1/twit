@@ -1,0 +1,10 @@
+h2{
+   text-decoration: underline;
+    
+}
+
+#container{
+    width: 960px;
+    margin:0px auto;
+    background: #7EC0EE;
+}
