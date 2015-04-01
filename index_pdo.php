@@ -133,7 +133,7 @@ session_start();
                 if($_SESSION['connect']==TRUE){
                 ?>
                 <h2>Connecté sous : <?php echo $_SESSION['login']; ?></h2><br/>
-                <input type="submit" name="deco" value="deconnection"/>
+                <input type="submit" id="deco" name="deco" value="deconnection"/>
                 <?php
                 }
                 ?>
@@ -144,8 +144,8 @@ session_start();
                 }
                 else{
                     ?>
-                    <a href="page_ret.php">Go page de nos retwits</a><br/>
-                    <a href="page_fav.php">Go page de nos favoris</a><br/>
+                    <a id="page_ret" href="page_ret.php">Go page de nos retwits</a><br/>
+                    <a id="page_fav" href="page_fav.php">Go page de nos favoris</a><br/>
                 <?php
                 //var_dump($_SESSION);
                 //Les erreurs en PDO sont des exceptions donc on les gère(On est en POO)
@@ -258,19 +258,20 @@ session_start();
                 <?php
                 if($_SESSION['nb']!=0){
                 ?>
-                    <input type="submit" name="prec" value="precedent"/>
+                    <input type="submit" id="prec" name="prec" value="precedent"/>
                 <?php
                 }
                 $tailleX = $tailleMAX-4;
                 if($_SESSION['nb']<$tailleX){
                 ?>
-                    <input type="submit" name="suiv" value="suivant"/>
+                    <input type="submit" id="suiv" name="suiv" value="suivant"/>
                 <?php
                 }
                 ?>
             </form>
         </div>
     </body>
+    <script type="text/javascript" href="script.js"></script>
 </html>
 <?php
     }
