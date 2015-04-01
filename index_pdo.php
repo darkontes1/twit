@@ -1,9 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
-    </head>
-    <body>
+
 
 <?php
 //session_start();
@@ -118,6 +113,12 @@ session_start();
         }      
     }
 ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
 <div id="container">
 <form method="post" action="index_pdo.php">
     <?php

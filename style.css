@@ -1,6 +1,10 @@
 h2{
    text-decoration: underline;
-    
+   border: 1px solid black;
+   padding: 8px;
+   margin-left: 35px;
+   float: left;
+   margin-right: 
 }
 
 #container{
