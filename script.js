@@ -25,11 +25,20 @@ $(document).on("click", "#deco", function(){
     });
 });
 
-$(document).on("click","retweet", function(){
+$(document).on("click","#retweet", function(){
     $.ajax({
         method:"GET",
         url:"index_pdo.php",
         data:{"action":"retweet"},
+        success:function(r){}
+    });
+});
+
+$(document).on("click","#favori", function(){
+    $.ajax({
+        method:"GET",
+        url:"index_pdo.php",
+        data:{"action":"favori"},
         success:function(r){}
     });
 });
