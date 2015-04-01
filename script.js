@@ -18,27 +18,7 @@ $("#myform").on("click",function(){
 });
 
 //Quand on va cliquer sur le bouton de déconnexion
-$("#deco").on("click", function(){
-    $.ajax({
-        method:"POST"
 
-
-    });
-});
-
-$("#deco").on("click", function()
-{
-    $.ajax({
-                method: "POST",
-                url: "traitement.php",
-                data: {code:code_image},
-                success : function() 
-                    {
-                                             
-
-                    }
-            });
-    });
 
 $("#deco").on("click", function(){
     $.ajax({
