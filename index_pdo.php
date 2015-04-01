@@ -36,8 +36,9 @@ session_start();
         $_SESSION['nb'] += 5;
         //header('location: index_pdo.php');
     }
+
     //Bouton de connection est appuyé
-    if(isset($_POST['co'])){
+    /*if(isset($_POST['co'])){
         $login = filter_input(INPUT_POST,'valueCo',FILTER_SANITIZE_STRING);
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
@@ -48,9 +49,8 @@ session_start();
             $_SESSION['login'] = $login;
             $_SESSION['id'] = (int)$result[0]['idUser'];
         }
-    }
+    }*/
     if(isset($_POST['action']) && $_POST['action']=="co"){
-        echo $_POST['login'];
         $login = $_POST['login'];
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
@@ -64,13 +64,20 @@ session_start();
     }
 
     //Bouton de déco est appuyé
-    if(isset($_POST['deco'])){
+    /*if(isset($_POST['deco'])){
         $_SESSION['connect'] = FALSE;
         $_SESSION['login'] = $meow;
         $_SESSION['nb'] = 0;
         $_SESSION['message'] = '';
         $_SESSION['id'] = -1;
-    }
+    }*/
+    if(isset($_POST['action']) && $_POST['action']=="deco"){
+        $_SESSION['connect'] = FALSE;
+        $_SESSION['login'] = $meow;
+        $_SESSION['nb'] = 0;
+        $_SESSION['message'] = '';
+        $_SESSION['id'] = -1;
+
     //Bouton de retweet est appuyé
     if(isset($_GET['action'])){
         $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
