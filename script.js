@@ -6,7 +6,7 @@ $("#co").on("click",function(){
         method:"POST",
         url:"index_pdo.php",
         data:{"action":"co",
-            "login":
+            "login":$("#valueCo").value,
         },
         success: function(r){
             console.log(r);
