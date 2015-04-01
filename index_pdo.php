@@ -50,9 +50,8 @@ session_start();
         }
     }*/
     if(isset($_POST['action']) && $_POST['action']=="co"){
-        //echo "toto";
-        $login = filter_input(INPUT_POST,$_POST['login'],FILTER_SANITIZE_STRING);
-        echo $login;
+        echo $_POST['login'];
+        $login = $_POST['login'];
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
         $data->execute();
