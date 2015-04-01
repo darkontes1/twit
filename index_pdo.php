@@ -1,0 +1,256 @@
+<?php
+//session_start();
+//session_destroy();
+session_start();
+    $meow = 'Meow_kitty_cat';
+    if(empty($_SESSION)){  //Préférer utiliser empty plutôt que isset pour les session car un session_start déclare une fonction directement
+        $_SESSION['nb'] = 0;
+        $_SESSION['connect'] = FALSE;
+        $_SESSION['login'] = $meow;
+        $_SESSION['id'] = -1;
+        $_SESSION['idTwit'] = '';
+    }
+    try{
+    //Syntaxe init PDO => $host;$BDD,$name,$mdp
+        $db = new PDO('mysql:host=localhost;dbname=twitr','root','');
+    } catch(PDOException $ex){
+       echo '<br/>';
+       echo 'echec lors de la connexion a MySQL : ('.$ex->getCode().')';
+       echo $ex->getMessage();
+       exit();
+    }
+
+    //var_dump($_SESSION);
+    //bouton prec est appuyé
+    if(isset($_POST['prec'])){
+        //echo '##';
+        $_SESSION['nb'] -= 5;
+        if($_SESSION['nb'] < 0){
+            $_SESSION['nb'] = 0;
+        }
+        //header('location: index_pdo.php');
+    }
+    //bouton suiv apppuyé
+    elseif(isset($_POST['suiv'])){
+        //echo '--';
+        $_SESSION['nb'] += 5;
+        //header('location: index_pdo.php');
+    }
+    //Bouton de connection est appuyé
+    if(isset($_POST['co'])){
+        $login = filter_input(INPUT_POST,'valueCo',FILTER_SANITIZE_STRING);
+        $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
+        $data = $db->prepare($query);
+        $data->execute();
+        $result = $data->fetchAll(PDO::FETCH_ASSOC);
+        if(count($result)>0){
+            $_SESSION['connect'] = TRUE;
+            $_SESSION['login'] = $login;
+            $_SESSION['id'] = (int)$result[0]['idUser'];
+        }
+    }
+    //Bouton de déco est appuyé
+    if(isset($_POST['deco'])){
+        $_SESSION['connect'] = FALSE;
+        $_SESSION['login'] = $meow;
+        $_SESSION['nb'] = 0;
+        $_SESSION['message'] = '';
+        $_SESSION['id'] = -1;
+    }
+    //Bouton de retweet est appuyé
+    if(isset($_GET['action'])){
+        $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
+        if(isset($_GET['idTwit'])){
+            $idT = filter_input(INPUT_GET,'idTwit',FILTER_SANITIZE_NUMBER_INT);
+            if($action == "retwit"){
+                //echo('retwit');
+                $idU = $_SESSION['id'];
+                $query = 'SELECT U.idUser, dateTwit
+                        FROM users U 
+                        JOIN reltwitusers R ON R.idUser = U.idUser 
+                        WHERE idTwit = "'.$idT.'"
+                        ORDER BY dateTwit ASC';
+                $data = $db->prepare($query);
+                $data->execute();
+                $result = $data->fetchAll(PDO::FETCH_ASSOC);
+                $query = 'INSERT INTO reltwitusers(idUser, idTwit,retwit,origin) VALUES ('.$idU.','.$idT.',1,'.$result[0]['idUser'].')';
+                $data = $db->prepare($query);
+                $data->execute();
+                //var_dump($data);
+            }
+        }
+    }
+
+    //Bouton Favori appuyé
+    if(isset($_GET['action'])){
+        $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
+        if(isset($_GET['idTwit'])){
+            $idT = filter_input(INPUT_GET,'idTwit',FILTER_SANITIZE_NUMBER_INT);
+            $idU = $_SESSION['id'];
+            if($action == "favori"){
+                $query = 'SELECT * FROM favori WHERE idTwit = "'.$idT.'" AND idUser = "'.$idU.'"';
+                $data = $db->prepare($query);
+                $data->execute();
+                $result = $data->fetchAll(PDO::FETCH_ASSOC);
+                if(count($result)>0){
+                    $query = 'DELETE FROM favori WHERE idUser = "'.$idU.'" AND idTwit = "'.$idT.'"';
+                    $data = $db->prepare($query);
+                    $data->execute();
+                    //echo ('delete');
+                }
+                else{
+                    //echo $idU.'-'.$idT;
+                    $query = 'INSERT INTO favori(idUser, idTwit) VALUES (:idU, :idT)';
+                    $tab = array('idU'=>$idU,
+                            'idT'=>$idT);
+                    $data = $db->prepare($query);
+                    $data->execute($tab);
+                    //echo ('add');
+                }    
+            }
+        }      
+    }
+?>
+<form method="post" action="index_pdo.php">
+    <?php
+    if($_SESSION['connect']==FALSE){
+        echo '<label>login</label><input type="text" name="valueCo" required>';
+        echo '<input type="submit" name="co" value="connection"/>';
+    }
+    if($_SESSION['connect']==TRUE){
+        echo '<h2>connecte sous : '.$_SESSION['login'].'</h2><br/>';
+        echo '<input type="submit" name="deco" value="deconnection"/>';
+    }
+    ?>
+</form>
+<?php
+    if($_SESSION['login']==$meow){
+        echo 'Veuillez vous connecter :3';
+    }
+    else{
+        echo '<a href="page_ret.php">Go page de nos retwits</a><br/>';
+        echo '<a href="page_fav.php">Go page de nos favoris</a><br/>';
+    //var_dump($_SESSION);
+    //Les erreurs en PDO sont des exceptions donc on les gère(On est en POO)
+    /*
+    En mysqli et pdo : $query = 'SELECT * FROM users WHERE idUser = ? AND nameUser = ?'
+    $tab = array(7,'toto');
+    prepare($tab);
+    execute
+    En pdo : $query = 'SELECT * FROM users WHERE idUser = :id AND nameUser = :name'
+    $tab = array('id' => 7, 'name' => 'toto');
+    prepare($query);
+    exec($tab);
+    */
+    //$query = 'SELECT * FROM users WHERE idUser = :id';
+    //1ère solution
+    //$tab = array('id'=>1);
+    //$data = $db->prepare($query);
+    //$data->execute($tab);
+    //var_dump($db);
+    //var_dump($data);
+    //2eme solution
+    /*$idUser = '1';
+    $data = $db->prepare($query);
+    $data->bindParam(':id',$idUser, PDO::PARAM_INT);
+    $data->execute();*/
+    //$result = $data->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($result);
+    /*for($i=0;$i<10;$i++){
+        $query = 'INSERT INTO twit(messageTwit) VALUES (:message)';
+        $tab = array('message'=>'Twit automatique pour remplir la BDD '.$i);
+        $data = $db->prepare($query);
+        $data->execute($tab);
+        $result = $data->fetchAll(PDO::FETCH_ASSOC);
+        $query = 'INSERT INTO reltwitusers(idUser,idTwit) VALUES (:idU,:idT)';
+        $tab = array('idU'=>2,
+            'idT'=>$db->lastInsertId());
+        $data = $db->prepare($query);
+        $data->execute($tab);
+        $result = $data->fetchAll(PDO::FETCH_ASSOC);
+    }*/
+    $query = 'SELECT loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit
+            FROM users U 
+            JOIN reltwitusers R ON R.idUser = U.idUser 
+            JOIN twit T ON T.idTwit = R.idTwit
+            ORDER BY dateTwit DESC';
+    $data = $db->prepare($query);
+    $data->execute();
+    $result = $data->fetchAll(PDO::FETCH_ASSOC);
+    $tailleMAX = count($result);
+    //var_dump($tailleMAX);
+
+    $query = 'SELECT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit
+            FROM users U 
+            JOIN reltwitusers R ON R.idUser = U.idUser 
+            JOIN twit T ON T.idTwit = R.idTwit
+            ORDER BY dateTwit DESC
+            LIMIT :nb1, :nb2';
+    //$tab2 = array('nb1' => $_SESSION['nb'],
+    //       'nb2' => $_SESSION['nb']+5);
+    //var_dump($tab2);
+    $data = $db->prepare($query);
+    $data->bindValue('nb1',$_SESSION['nb'],PDO::PARAM_INT);
+    $data->bindValue('nb2',5,PDO::PARAM_INT);
+    $data->execute();
+    $result = $data->fetchAll(PDO::FETCH_ASSOC);
+    //var_dump($result);
+    $taille = count($result);
+
+    if($taille==0){
+        $_SESSION['nb'] = 0;
+        echo 'PAS DE TWEET DANS LA BASE !';
+        header('location: index_pdo.php');
+    }
+    else{
+        for($i=0;$i<$taille;$i++){
+            if($_SESSION['login']==$result[$i]['loginUser']){
+                echo '<article style="border:1px solid skyblue; width:200px; padding:5px;">';
+                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b><br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
+                //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
+                echo '<a href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
+                echo '<a href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
+                echo '</article><br/>';
+            }
+            else{
+                echo '<article style="border:1px solid skyblue; width:200px; padding:5px;">';
+                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b><br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
+                //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
+                echo '<a href="index_pdo.php?action=retwit&idTwit='.$result[$i]['idTwit'].'">retwit</a><br/>';
+                //Si il est favori
+                $query = 'SELECT * FROM favori WHERE idUser = "'.$_SESSION['id'].'" AND idTwit = "'.$result[$i]['idTwit'].'"';
+                $data = $db->prepare($query);
+                $data->execute();
+                $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
+                if(count($result2)>0){
+                    echo '<a href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'" style="background-color:orange;">favori</a>';
+                }
+                else{
+                    echo '<a href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+                }
+                echo '</article><br/>';
+            }
+        }
+    }
+
+
+?>
+<form method="post" action="index_pdo.php">
+    <?php
+    if($_SESSION['nb']!=0){
+        echo '<input type="submit" name="prec" value="precedent"/>';
+    }
+    $tailleX = $tailleMAX-4;
+    if($_SESSION['nb']<$tailleX){
+        echo '<input type="submit" name="suiv" value="suivant"/>';
+    }
+    ?>
+</form>
+<?php
+    }
+    /*while($row = $data->fetch(PDO::FETCH_ASSOC)){
+        echo $row->loginUser." ".$row->nomUser." ".$row->messageTwit."<br/>";
+    }*/
+?>
