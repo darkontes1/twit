@@ -26,22 +26,15 @@ $("#deco").on("click", function(){
     });
 });
 
-<<<<<<< HEAD
-$("#deco").on("click", function()
-{
+$("#deco").on("click", function(){
     $.ajax({
-                method: "POST",
-                url: "traitement.php",
-                data: {code:code_image},
-                success : function() 
-                    {
-                        // var canvas = document.createElement("canvas");
-                        // $("canvas").attr("width",$("img").width) ;
-                        // $("canvas").attr("height", $("img").height)                       
-
-                    }
-            });
+        method: "POST",
+        url: "traitement.php",
+        data: {code:code_image},
+        success : function() {    
+            // var canvas = document.createElement("canvas");
+            // $("canvas").attr("width",$("img").width) ;
+            // $("canvas").attr("height", $("img").height)                       
+        }
     });
-=======
-//
->>>>>>> origin/master
+});
