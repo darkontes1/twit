@@ -135,6 +135,7 @@ session_start();
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <a id="titre">TWITR©</a>
         <div id="container">
             <form id="myform" method="post" action="index_pdo.php">
                 <?php

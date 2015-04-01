@@ -14,6 +14,11 @@ h2{
     margin:0px auto;
     /*background: #7EC0EE;*/
     height:1000px;
+    border: 1px solid skyblue;
+    padding: 10px;
+    border-radius: 22px;
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 0px;
 }
 
 article{
@@ -43,4 +48,12 @@ a{
     background: #7EC0EE;
     float: left;
     width: 200px;
+}
+
+#titre{
+    margin-left: 460px;
+    font-size: 100px;
+    text-decoration: underline;
+    text-decoration: none;
+    margin-bottom: 25px;
 }
