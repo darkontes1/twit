@@ -9,6 +9,7 @@ $("#co").on("click",function(){
     });
 });
 
+//Quand on va cliquer sur le bouton de déconnexion
 $("#deco").on("click", function(){
     $.ajax({
         type:"POST"
@@ -16,3 +17,5 @@ $("#deco").on("click", function(){
 
     });
 });
+
+//
