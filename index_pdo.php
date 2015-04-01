@@ -126,7 +126,7 @@ session_start();
                 if($_SESSION['connect']==FALSE){
                 ?>
                 <label>login</label><input type="text" name="valueCo" required>
-                <input type="submit" name="co" value="connection"/>
+                <input type="submit" id="co" name="co" value="connection"/>
                 <?php
                 }
                 if($_SESSION['connect']==TRUE){
