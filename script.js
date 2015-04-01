@@ -26,8 +26,6 @@ $("#deco").on("click", function(){
     });
 });
 
-<<<<<<< HEAD
-
 $("#deco").on("click", function()
 {
     $.ajax({
@@ -41,8 +39,6 @@ $("#deco").on("click", function()
                     }
             });
     });
-
-=======
 $("#deco").on("click", function(){
     $.ajax({
         method: "POST",
@@ -55,4 +51,3 @@ $("#deco").on("click", function(){
         }
     });
 });
->>>>>>> origin/master
