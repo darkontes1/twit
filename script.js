@@ -19,15 +19,11 @@ $(document).on("click","#co",function(){
 
 //Quand on va cliquer sur le bouton de déconnexion
 
-/*
 $("#deco").on("click", function(){
     $.ajax({
         method: "POST",
-        url: "traitement.php",
-        data: {code:code_image},
-        success : function() {    
-                                  
-        }
+        url: "index_pdo.php",
+        data: {"action": "deco"},
+        success : function(){}
     });
 });
-*/
