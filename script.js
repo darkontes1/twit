@@ -1,4 +1,3 @@
-
 //Quand on va cliquer sur le bouton de connexion
 $(document).on("click","#co",function(){
     var tata = $("#valueCo").val();
