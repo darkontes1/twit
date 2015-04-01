@@ -36,6 +36,7 @@ session_start();
         $_SESSION['nb'] += 5;
         //header('location: index_pdo.php');
     }
+
     //Bouton de connection est appuyé
     if(isset($_POST['co'])){
         $login = filter_input(INPUT_POST,'valueCo',FILTER_SANITIZE_STRING);
@@ -50,8 +51,8 @@ session_start();
         }
     }
     if(isset($_POST['action']) && $_POST['action']=="co"){
-        echo $_POST['login'];
-        $login = $_POST['login'];
+        $loginX = $_POST['login'];
+        $login = filter_input(INPUT_POST,$loginX,FILTER_SANITIZE_STRING);
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
         $data->execute();
