@@ -98,9 +98,12 @@ session_start();
                 $data = $db->prepare($query);
                 $data->execute();
                 $result2 = $data->fetchAll(PDO::FETCH_ASSOC);*/
-                echo '<article style="border:1px solid skyblue; width:200px; padding:5px;">';
-                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b><br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                echo '<article>';
+                echo '<div id="top-article">';
+                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
                 echo '<p>'.$result[$i]['messageTwit'].'...<br/>retwitter par : @'.$result[$i]['loginUser'].'</p>';
+                echo '</div>';
                 //echo '<p>twit de : '.$result[0]['loginUser'].'</p>';
                 //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
                 echo '<a href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';

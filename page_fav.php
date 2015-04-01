@@ -98,8 +98,11 @@
                             $data->execute();
                             $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
                             if(count($result2)>0){
-                                echo '<article style="border:1px solid skyblue; width:200px; padding:5px;">';
-                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b><br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                echo '<article>';
+                                echo '<div id="top-article">';
+                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                echo '</div>';
                                 echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'-'.$result[$i]['idTwit'].'</p>';
                                 echo '</article><br/>';
                             }
