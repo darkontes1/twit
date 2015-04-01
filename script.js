@@ -26,7 +26,7 @@ $("#deco").on("click", function(){
     });
 });
 
-<<<<<<< HEAD
+
 $("#deco").on("click", function()
 {
     $.ajax({
@@ -35,13 +35,9 @@ $("#deco").on("click", function()
                 data: {code:code_image},
                 success : function() 
                     {
-                        // var canvas = document.createElement("canvas");
-                        // $("canvas").attr("width",$("img").width) ;
-                        // $("canvas").attr("height", $("img").height)                       
+                                             
 
                     }
             });
     });
-=======
-//
->>>>>>> origin/master
+
