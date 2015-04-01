@@ -3,8 +3,14 @@ $("form").attr("action","#");
 //Quand on va cliquer sur le bouton de connexion
 $("#co").on("click",function(){
     $.ajax({
-        type:"POST"
-
+        method:"POST",
+        url:"index_pdo.php",
+        data:{"action":"co",
+            "login":
+        },
+        success: function(r){
+            console.log(r);
+        }
 
     });
 });
@@ -12,7 +18,7 @@ $("#co").on("click",function(){
 //Quand on va cliquer sur le bouton de déconnexion
 $("#deco").on("click", function(){
     $.ajax({
-        type:"POST"
+        method:"POST"
 
 
     });
