@@ -17,11 +17,12 @@ $(document).on("click","#co",function(){
 
 //Quand on va cliquer sur le bouton de déconnexion
 
-$("#deco").on("click", function(){
+$(document).on("click", "#deco", function(){
+    alert("yo");
     $.ajax({
         method: "POST",
         url: "index_pdo.php",
-        data: {"action": "deco"},
-        success : function(){}
+        data: {"action":"deco"},
+        success : function(r){}
     });
 });
