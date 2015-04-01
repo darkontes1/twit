@@ -37,7 +37,7 @@ session_start();
         //header('location: index_pdo.php');
     }
     //Bouton de connection est appuyé
-    if(isset($_POST['co'])){
+    /*if(isset($_POST['co'])){
         $login = filter_input(INPUT_POST,'valueCo',FILTER_SANITIZE_STRING);
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
@@ -48,8 +48,9 @@ session_start();
             $_SESSION['login'] = $login;
             $_SESSION['id'] = (int)$result[0]['idUser'];
         }
-    }
-    if(isset($_POST['action']) && $_POST['action']=="connexion"){
+    }*/
+    if(isset($_POST['action']) && $_POST['action']=="co"){
+        echo "toto";
         $login = filter_input(INPUT_POST,$_POST['login'],FILTER_SANITIZE_STRING);
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
@@ -134,7 +135,7 @@ session_start();
     </head>
     <body>
         <div id="container">
-            <form method="post" action="index_pdo.php">
+            <form id="myform" method="post" action="index_pdo.php">
                 <?php
                 if($_SESSION['connect']==FALSE){
                 ?>
@@ -283,18 +284,15 @@ session_start();
                 $tailleX = $tailleMAX-4;
                 if($_SESSION['nb']<$tailleX){
                 ?>
-<<<<<<< HEAD
                     <br/><input type="submit" name="suiv" value="suivant"/>
-=======
                     <input type="submit" id="suiv" name="suiv" value="suivant"/>
->>>>>>> origin/master
                 <?php
                 }
                 ?>
             </form>
         </div>
+        <script type="text/javascript" src="script.js"></script>
     </body>
-    <script type="text/javascript" href="script.js"></script>
 </html>
 <?php
     }
