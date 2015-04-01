@@ -9,7 +9,7 @@ $(document).on("click","#co",function(){
         data:{"action":"co",
             "login":tata
         },
-        success: function(r){
+        success:function(r){
             //console.log(r);
         }
     });
@@ -22,5 +22,23 @@ $(document).on("click", "#deco", function(){
         url: "index_pdo.php",
         data: {"action":"deco"},
         success : function(r){}
+    });
+});
+
+$(document).on("click","#retweet", function(){
+    $.ajax({
+        method:"GET",
+        url:"index_pdo.php",
+        data:{"action":"retweet"},
+        success:function(r){}
+    });
+});
+
+$(document).on("click","#favori", function(){
+    $.ajax({
+        method:"GET",
+        url:"index_pdo.php",
+        data:{"action":"favori"},
+        success:function(r){}
     });
 });
