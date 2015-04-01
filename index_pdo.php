@@ -65,12 +65,20 @@ session_start();
     }
 
     //Bouton de déco est appuyé
-    if(isset($_POST['deco'])){
+    if(isset($_POST['action']) && $_POST['action']=="deco"){
+        echo "blablabla";
         $_SESSION['connect'] = FALSE;
         $_SESSION['login'] = $meow;
         $_SESSION['nb'] = 0;
         $_SESSION['message'] = '';
         $_SESSION['id'] = -1;
+
+    // if(isset($_POST['deco'])){
+    //     $_SESSION['connect'] = FALSE;
+    //     $_SESSION['login'] = $meow;
+    //     $_SESSION['nb'] = 0;
+    //     $_SESSION['message'] = '';
+    //     $_SESSION['id'] = -1;
     }
     //Bouton de retweet est appuyé
     if(isset($_GET['action'])){
