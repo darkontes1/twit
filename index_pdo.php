@@ -252,7 +252,7 @@ session_start();
                             echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
 
                             //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
-                            echo '<a id="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
+                            echo '<a id="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a>';
                             echo '<a id="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
                             echo '</article>';
                         }
@@ -264,7 +264,7 @@ session_start();
                             echo '</div>';
                             echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
                             //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
-                            echo '<a href=" id="bouton-action" index_pdo.php?action=retwit&idTwit='.$result[$i]['idTwit'].'">retwit</a><br/>';
+                            echo '<a href=" id="bouton-action" index_pdo.php?action=retwit&idTwit='.$result[$i]['idTwit'].'">retwit</a>';
                             //Si il est favori
                             $query = 'SELECT * FROM favori WHERE idUser = "'.$_SESSION['id'].'" AND idTwit = "'.$result[$i]['idTwit'].'"';
                             $data = $db->prepare($query);
