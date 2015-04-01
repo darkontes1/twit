@@ -49,6 +49,19 @@ session_start();
             $_SESSION['id'] = (int)$result[0]['idUser'];
         }
     }
+    if($_POST['action']=="connexion"){
+        $login = filter_input(INPUT_POST,$_POST['login'],FILTER_SANITIZE_STRING);
+        $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
+        $data = $db->prepare($query);
+        $data->execute();
+        $result = $data->fetchAll(PDO::FETCH_ASSOC);
+        if(count($result)>0){
+            $_SESSION['connect'] = TRUE;
+            $_SESSION['login'] = $login;
+            $_SESSION['id'] = (int)$result[0]['idUser'];
+        }
+    }
+
     //Bouton de déco est appuyé
     if(isset($_POST['deco'])){
         $_SESSION['connect'] = FALSE;
@@ -96,7 +109,7 @@ session_start();
                     $query = 'DELETE FROM favori WHERE idUser = "'.$idU.'" AND idTwit = "'.$idT.'"';
                     $data = $db->prepare($query);
                     $data->execute(); 
-                    //echo ('delete');
+                    //echo ('delete');name="valueCo"
                 }
                 else{
                     //echo $idU.'-'.$idT;
