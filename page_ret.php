@@ -41,6 +41,15 @@ session_start();
         $_SESSION['id'] = -1;
     }
 ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Twitter</title>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
 <form method="post" action="index_pdo.php">
     <?php
     if($_SESSION['connect']==FALSE){

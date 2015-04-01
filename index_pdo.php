@@ -131,7 +131,7 @@ session_start();
                 }
                 if($_SESSION['connect']==TRUE){
                 ?>
-                <h2>connecte sous : <?php echo $_SESSION['login']; ?></h2><br/>
+                <h2>Connecté sous : <?php echo $_SESSION['login']; ?></h2><br/>
                 <input type="submit" name="deco" value="deconnection"/>
                 <?php
                 }
