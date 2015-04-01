@@ -122,8 +122,10 @@ session_start();
 <form method="post" action="index_pdo.php">
     <?php
     if($_SESSION['connect']==FALSE){
-        echo '<label>login</label><input type="text" name="valueCo" required>';
-        echo '<input type="submit" name="co" value="connection"/>';
+    ?>
+        <label>login</label><input type="text" name="valueCo" required>
+        <input type="submit" name="co" value="connection"/>
+    <?php
     }
     if($_SESSION['connect']==TRUE){
         echo '<h2>Connecté sous : '.$_SESSION['login'].'</h2><br/>';
