@@ -50,6 +50,7 @@
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
+        <div id="container">
             <form method="post" action="index_pdo.php">
                 <?php
                 if($_SESSION['connect']==FALSE){
@@ -67,9 +68,16 @@
                     echo 'Veuillez vous connecter :3';
                 }
                 else{
+                    echo '<nav>';
+                    echo '<ul>';
+                    echo '<li>';
                     echo '<a class="bouton-action" href="index_pdo.php">Go page de tous les twits</a>';
+                    echo '</li>';
+                    echo '<li>';
                     echo '<a class="bouton-action" href="page_ret.php">Go page de nos retwits</a>';
-
+                    echo '</li>';
+                    echo '</ul>';
+                    echo '</nav><br/><br/><br/>';
 
                 $query = 'SELECT DISTINCT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit,origin
                         FROM users U 
@@ -105,7 +113,7 @@
                                 echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
                                 echo '</div>';
                                 echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'-'.$result[$i]['idTwit'].'</p>';
-                                echo '</article><br/>';
+                                echo '</article>';
                             }
                         }
                     }
@@ -113,5 +121,6 @@
 
                 }
             ?>
+        </div>
     </body>
 </html>
