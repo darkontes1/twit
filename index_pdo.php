@@ -223,8 +223,12 @@ session_start();
                     for($i=0;$i<$taille;$i++){
                         if($_SESSION['login']==$result[$i]['loginUser']){
                             echo '<article>';
-                            echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                            echo '<div id="top-article">';
+                            echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                            echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                            echo '</div>';
                             echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
+
                             //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
                             echo '<a href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
                             echo '<a href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
@@ -232,7 +236,10 @@ session_start();
                         }
                         else{
                             echo '<article>';
-                            echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b><br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                            echo '<div id="top-article">';
+                            echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                            echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                            echo '</div>';
                             echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
                             //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
                             echo '<a href="index_pdo.php?action=retwit&idTwit='.$result[$i]['idTwit'].'">retwit</a><br/>';
@@ -242,7 +249,7 @@ session_start();
                             $data->execute();
                             $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
                             if(count($result2)>0){
-                                echo '<a href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'" style="background-color:orange;">favori</a>';
+                                echo '<a href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
                             }
                             else{
                                 echo '<a href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
@@ -264,7 +271,7 @@ session_start();
                 $tailleX = $tailleMAX-4;
                 if($_SESSION['nb']<$tailleX){
                 ?>
-                    <input type="submit" name="suiv" value="suivant"/>
+                    <br/><input type="submit" name="suiv" value="suivant"/>
                 <?php
                 }
                 ?>
