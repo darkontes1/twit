@@ -1,13 +1,13 @@
 $("body").find("#container").children("form").attr("action","#");
 
 //Quand on va cliquer sur le bouton de connexion
-$("#myform").on("click",function(){
+$("#co").on("click",function(){
     alert("toto");
     var tata = $("#valueCo").val();
     console.log(tata);
     $.ajax({
-        method:$(this).attr("method"),
-        url:$(this).attr("action"),
+        method:"POST",
+        url:"index_pdo.php",
         data:{"action":"co",
             "login":tata
         },
