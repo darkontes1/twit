@@ -1,4 +1,3 @@
-$("body").find("#container").children("form").attr("action","#");
 
 //Quand on va cliquer sur le bouton de connexion
 $(document).on("click","#co",function(){
