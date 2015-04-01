@@ -26,6 +26,23 @@ $("#deco").on("click", function(){
     });
 });
 
+<<<<<<< HEAD
+
+$("#deco").on("click", function()
+{
+    $.ajax({
+                method: "POST",
+                url: "traitement.php",
+                data: {code:code_image},
+                success : function() 
+                    {
+                                             
+
+                    }
+            });
+    });
+
+=======
 $("#deco").on("click", function(){
     $.ajax({
         method: "POST",
@@ -38,3 +55,4 @@ $("#deco").on("click", function(){
         }
     });
 });
+>>>>>>> origin/master
