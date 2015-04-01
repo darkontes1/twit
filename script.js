@@ -1,19 +1,19 @@
 $("body").find("#container").children("form").attr("action","#");
-alert("toto");
+
 //Quand on va cliquer sur le bouton de connexion
 $("#myform").on("click",function(){
     alert("toto");
     var tata = $("#valueCo").val();
+    console.log(tata);
     $.ajax({
         method:$(this).attr("method"),
         url:$(this).attr("action"),
         data:{"action":"co",
-            $(this).serialize()
+            "login":tata
         },
         success: function(r){
             console.log(r);
         }
-
     });
 });
 
@@ -26,7 +26,10 @@ $("#deco").on("click", function(){
     });
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
 $("#deco").on("click", function()
 {
     $.ajax({
@@ -40,8 +43,11 @@ $("#deco").on("click", function()
                     }
             });
     });
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/master
 $("#deco").on("click", function(){
     $.ajax({
         method: "POST",
@@ -52,4 +58,7 @@ $("#deco").on("click", function(){
         }
     });
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
