@@ -245,8 +245,8 @@ session_start();
                             echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
 
                             //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
-                            echo '<a href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
-                            echo '<a href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
+                            echo '<a id="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
+                            echo '<a id="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
                             echo '</article>';
                         }
                         else{
@@ -257,17 +257,17 @@ session_start();
                             echo '</div>';
                             echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
                             //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
-                            echo '<a href="index_pdo.php?action=retwit&idTwit='.$result[$i]['idTwit'].'">retwit</a><br/>';
+                            echo '<a href=" id="bouton-action" index_pdo.php?action=retwit&idTwit='.$result[$i]['idTwit'].'">retwit</a><br/>';
                             //Si il est favori
                             $query = 'SELECT * FROM favori WHERE idUser = "'.$_SESSION['id'].'" AND idTwit = "'.$result[$i]['idTwit'].'"';
                             $data = $db->prepare($query);
                             $data->execute();
                             $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
                             if(count($result2)>0){
-                                echo '<a href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+                                echo '<a id="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
                             }
                             else{
-                                echo '<a href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+                                echo '<a id="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
                             }
                             echo '</article>';
                         }

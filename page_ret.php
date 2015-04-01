@@ -106,8 +106,8 @@ session_start();
                 echo '</div>';
                 //echo '<p>twit de : '.$result[0]['loginUser'].'</p>';
                 //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
-                echo '<a href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
-                echo '<a href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
+                echo '<a id="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
+                echo '<a id="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
                 echo '</article><br/>';
             }
         }
