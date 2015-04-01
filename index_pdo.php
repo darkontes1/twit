@@ -49,6 +49,19 @@ session_start();
             $_SESSION['id'] = (int)$result[0]['idUser'];
         }
     }
+    if(isset($_POST['action']) && $_POST['action']=="connexion"){
+        $login = filter_input(INPUT_POST,$_POST['login'],FILTER_SANITIZE_STRING);
+        $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
+        $data = $db->prepare($query);
+        $data->execute();
+        $result = $data->fetchAll(PDO::FETCH_ASSOC);
+        if(count($result)>0){
+            $_SESSION['connect'] = TRUE;
+            $_SESSION['login'] = $login;
+            $_SESSION['id'] = (int)$result[0]['idUser'];
+        }
+    }
+
     //Bouton de déco est appuyé
     if(isset($_POST['deco'])){
         $_SESSION['connect'] = FALSE;
@@ -96,7 +109,7 @@ session_start();
                     $query = 'DELETE FROM favori WHERE idUser = "'.$idU.'" AND idTwit = "'.$idT.'"';
                     $data = $db->prepare($query);
                     $data->execute(); 
-                    //echo ('delete');
+                    //echo ('delete');name="valueCo"
                 }
                 else{
                     //echo $idU.'-'.$idT;
@@ -117,7 +130,6 @@ session_start();
         <meta charset="utf-8">
         <title>Twitter</title>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-        <script type="text/javascript" src="script.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
@@ -126,7 +138,7 @@ session_start();
                 <?php
                 if($_SESSION['connect']==FALSE){
                 ?>
-                <label>login</label><input type="text" name="valueCo" required>
+                <label>login</label><input type="text" id="valueCo" name="valueCo" required>
                 <input type="submit" id="co" name="co" value="connection"/>
                 <?php
                 }
