@@ -8,7 +8,7 @@ $(document).on("click","#co",function(){
             "login":tata
         },
         success:function(r){
-            //console.log(r);
+            console.log(eval(r));
         }
     });
 });
@@ -24,10 +24,13 @@ $(document).on("click", "#deco", function(){
 });
 
 $(document).on("click","#retweet", function(){
+    var tata = 
     $.ajax({
         method:"GET",
         url:"index_pdo.php",
-        data:{"action":"retweet"},
+        data:{"action":"retweet",
+            "idTwit":tata
+        },
         success:function(r){}
     });
 });

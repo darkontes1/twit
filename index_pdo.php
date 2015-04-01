@@ -254,7 +254,6 @@ session_start();
                             echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
                             echo '</div>';
                             echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
-
                             //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
                             echo '<a class="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a>';
                             echo '<a class="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
