@@ -166,8 +166,12 @@ session_start();
                 }
                 else{
                     ?>
-                    <a id="page_ret" href="page_ret.php">Go page de nos retwits</a><br/>
-                    <a id="page_fav" href="page_fav.php">Go page de nos favoris</a><br/>
+                    <nav>
+                        <ul>
+                            <li><a class="bouton-action" id="page_ret" href="page_ret.php">Go page de nos retwits</a></li>
+                            <li><a class="bouton-action" id="page_fav" href="page_fav.php">Go page de nos favoris</a></li><br/>
+                        </ul>
+                    </nav>
                 <?php
                 //var_dump($_SESSION);
                 //Les erreurs en PDO sont des exceptions donc on les gère(On est en POO)
@@ -291,7 +295,7 @@ session_start();
                 $tailleX = $tailleMAX-4;
                 if($_SESSION['nb']<$tailleX){
                 ?>
-                    <br/><input type="submit" name="suiv" value="suivant"/>
+                    <br/>
                     <input type="submit" id="suiv" name="suiv" value="suivant"/>
                 <?php
                 }
