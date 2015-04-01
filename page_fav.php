@@ -67,8 +67,8 @@
                     echo 'Veuillez vous connecter :3';
                 }
                 else{
-                    echo '<a href="index_pdo.php">Go page de tous les twits</a><br/>';
-                    echo '<a href="page_ret.php">Go page de nos retwits</a><br/>';
+                    echo '<a class="bouton-action" href="index_pdo.php">Go page de tous les twits</a>';
+                    echo '<a class="bouton-action" href="page_ret.php">Go page de nos retwits</a>';
 
                 $query = 'SELECT DISTINCT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit,origin
                         FROM users U 

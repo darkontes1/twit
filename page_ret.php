@@ -67,8 +67,8 @@ session_start();
         echo 'Veuillez vous connecter :3';
     }
     else{
-        echo '<a href="index_pdo.php">Go page de tous les twits</a><br/>';
-        echo '<a href="page_fav.php">Go page de nos favoris</a><br/>';
+        echo '<a class="bouton-action" href="index_pdo.php">Go page de tous les twits</a>';
+        echo '<a class="bouton-action" href="page_fav.php">Go page de nos favoris</a>';
 
     $query = 'SELECT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit,origin
             FROM users U 
@@ -106,8 +106,8 @@ session_start();
                 echo '</div>';
                 //echo '<p>twit de : '.$result[0]['loginUser'].'</p>';
                 //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
-                echo '<a id="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a><br/>';
-                echo '<a id="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
+                echo '<a class="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a>';
+                echo '<a class="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
                 echo '</article><br/>';
             }
         }
