@@ -49,7 +49,7 @@ session_start();
             $_SESSION['id'] = (int)$result[0]['idUser'];
         }
     }
-    if($_POST['action']=="connexion"){
+    if(isset($_POST['action']) && $_POST['action']=="connexion"){
         $login = filter_input(INPUT_POST,$_POST['login'],FILTER_SANITIZE_STRING);
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
