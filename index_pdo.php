@@ -131,6 +131,7 @@ session_start();
         <meta charset="utf-8">
         <title>Twitter</title>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="script.js"></script>
         <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
@@ -271,8 +272,6 @@ session_start();
                         }
                     }
                 }
-
-
             ?>
             <form method="post" action="index_pdo.php">
                 <?php
@@ -291,7 +290,6 @@ session_start();
                 ?>
             </form>
         </div>
-        <script type="text/javascript" src="script.js"></script>
     </body>
 </html>
 <?php
