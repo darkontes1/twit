@@ -79,7 +79,7 @@ session_start();
         $_SESSION['id'] = -1;
     }
     //Bouton de retweet est appuyé
-    if(isset($_GET['action'])){
+    /*if(isset($_GET['action'])){
         $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
         if(isset($_GET['idTwit'])){
             $idT = filter_input(INPUT_GET,'idTwit',FILTER_SANITIZE_NUMBER_INT);
@@ -99,6 +99,23 @@ session_start();
                 $data->execute();
                 //var_dump($data);
             }
+        }
+    }*/
+    if(isset($_GET['action']) && $_GET['action']=="retweet"){
+        if(isset($_GET['idTwit'])){
+            $idT = $_GET['idTwit'];
+            $idU = $_SESSION['id'];
+            $query = 'SELECT U.idUser, dateTwit
+                    FROM users U 
+                    JOIN reltwitusers R ON R.idUser = U.idUser 
+                    WHERE idTwit = "'.$idT.'"
+                    ORDER BY dateTwit ASC';
+            $data = $db->prepare($query);
+            $data->execute();
+            $result = $data->fetchAll(PDO::FETCH_ASSOC);
+            $query = 'INSERT INTO reltwitusers(idUser, idTwit,retwit,origin) VALUES ('.$idU.','.$idT.',1,'.$result[0]['idUser'].')';
+            $data = $db->prepare($query);
+            $data->execute();
         }
     }
 
