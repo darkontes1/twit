@@ -396,7 +396,7 @@ session_start();
                 $tailleX = $tailleMAX-4;
                 if($_SESSION['nb']<$tailleX){
                 ?>
-                    <br/>
+                    <br/><br/>
                     <input type="submit" id="suiv" name="suiv" value="suivant"/>
                 <?php
                 }
