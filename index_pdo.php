@@ -120,7 +120,7 @@ session_start();
     }
 
     //Bouton Favori appuyé
-    if(isset($_GET['action'])){
+    /*if(isset($_GET['action'])){
         $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
         if(isset($_GET['idTwit'])){
             $idT = filter_input(INPUT_GET,'idTwit',FILTER_SANITIZE_NUMBER_INT);
@@ -147,6 +147,28 @@ session_start();
                 }    
             }
         }      
+    }*/
+    if(isset($_GET['action']) && $_GET['action']=="favori"){
+        if(isset($_GET['idTwit'])){
+            $idT = $_GET['idTwit'];
+            $idU = $_SESSION['id'];
+            $query = 'SELECT * FROM favori WHERE idTwit = "'.$idT.'" AND idUser = "'.$idU.'"';
+            $data = $db->prepare($query);
+            $data->execute();
+            $result = $data->fetchAll(PDO::FETCH_ASSOC);
+            if(count($result)>0){
+                $query = 'DELETE FROM favori WHERE idUser = "'.$idU.'" AND idTwit = "'.$idT.'"';
+                $data = $db->prepare($query);
+                $data->execute();
+            }
+            else{
+                $query = 'INSERT INTO favori(idUser, idTwit) VALUES (:idU, :idT)';
+                $tab = array('idU'=>$idU,
+                        'idT'=>$idT);
+                $data = $db->prepare($query);
+                $data->execute($tab);
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
