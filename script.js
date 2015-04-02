@@ -53,8 +53,9 @@ $(document).on("click","#a_favori", function(){
 
 $(document).on("click","#ajout", function(){
     var ajoutval = $("#ajouttweet").val();
+    alert(ajoutval);
     $.ajax({
-        method:"GET",
+        method:"POST",
         url:"index_pdo.php",
         data:{"action":"ajout",
             "tweet":ajoutval
