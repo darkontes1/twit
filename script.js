@@ -51,4 +51,14 @@ $(document).on("click","#a_favori", function(){
     });
 });
 
-
+$(document).on("click","#ajout", function(){
+    var ajoutval = $("#ajouttweet").val();
+    $.ajax({
+        method:"GET",
+        url:"index_pdo.php",
+        data:{"action":"ajout",
+            "tweet":ajoutval
+        },
+        success:function(r){}
+    });
+});

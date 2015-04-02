@@ -65,20 +65,19 @@ session_start();
 
     //Bouton pour ajouter un twit appuyé
     if(isset($_POST['ajout'])){
-            $idU=$_SESSION['id'];
-            $twit = $_POST['ajouttweet'];
-            $ReqTwit = 'INSERT INTO twit (messageTwit) VALUES (:message)';
-            $oTwit = $db->prepare($ReqTwit);
-            $oTwit->bindValue('message', $twit);
-            $oTwit->execute();
-            
-            $query = 'INSERT INTO reltwitusers(idUser,idTwit) VALUES (:idU,:idT)';
-            $tab = array('idU'=>$idU,
-                'idT'=>$db->lastInsertId());
-            $data = $db->prepare($query);
-            $data->execute($tab);
-                    
-        }
+        $idU=$_SESSION['id'];
+        $twit = $_POST['ajouttweet'];
+        $ReqTwit = 'INSERT INTO twit (messageTwit) VALUES (:message)';
+        $oTwit = $db->prepare($ReqTwit);
+        $oTwit->bindValue('message', $twit);
+        $oTwit->execute();
+        
+        $query = 'INSERT INTO reltwitusers(idUser,idTwit) VALUES (:idU,:idT)';
+        $tab = array('idU'=>$idU,
+            'idT'=>$db->lastInsertId());
+        $data = $db->prepare($query);
+        $data->execute($tab);      
+    }
 
     //Bouton de déco est appuyé
     /*if(isset($_POST['deco'])){
@@ -223,7 +222,7 @@ session_start();
                 else{
                     ?>
                     <form method="post" action="index_pdo.php">
-                        <textarea name="ajouttweet"></textarea>
+                        <textarea id="ajouttweet" name="ajouttweet"></textarea>
                         <input type="submit" id="ajout" name="ajout"/>
                     </form>
                     <nav>
