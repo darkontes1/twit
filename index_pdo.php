@@ -216,16 +216,16 @@ session_start();
                 }
                 ?>
             </form>
-            <form method="post" action="index_pdo.php">
-                <textarea name="ajouttweet"></textarea>
-                <input type="submit" id="ajout" name="ajout"/>
-            </form>
             <?php
                 if($_SESSION['login']==$meow){
                     echo 'Veuillez vous connecter :3';
                 }
                 else{
                     ?>
+                    <form method="post" action="index_pdo.php">
+                        <textarea name="ajouttweet"></textarea>
+                        <input type="submit" id="ajout" name="ajout"/>
+                    </form>
                     <nav>
                         <ul>
                             <li><a class="bouton-action" id="page_ret" href="page_ret.php">Go page de nos retwits</a></li>
