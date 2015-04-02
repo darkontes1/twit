@@ -5,7 +5,8 @@ $(document).on("click","#co",function(){
         method:"POST",
         url:"index_pdo.php",
         data:{"action":"co",
-            "login":tata
+            "login":tata,
+            "javascript":"oui" 
         },
         success:function(r){
             console.log(eval(r));
@@ -18,7 +19,9 @@ $(document).on("click", "#deco", function(){
     $.ajax({
         method: "POST",
         url: "index_pdo.php",
-        data: {"action":"deco"},
+        data:{"action":"deco",
+              "javascript":"non"
+            },
         success : function(r){}
     });
 });
@@ -43,3 +46,5 @@ $(document).on("click","#favori", function(){
         success:function(r){}
     });
 });
+
+
