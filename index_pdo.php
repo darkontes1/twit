@@ -291,7 +291,7 @@ session_start();
                             $data->execute();
                             $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
                             if(count($result2)>0){
-                                echo '<a class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+                                echo '<a id="fav-orange" class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
                             }
                             else{
                                 echo '<a class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
@@ -301,7 +301,9 @@ session_start();
                     }
                 }
             ?>
-            <form method="post" action="index_pdo.php">
+            
+        </div>
+        <form class="prec-suiv" method="post" action="index_pdo.php">
                 <?php
                 if($_SESSION['nb']!=0){
                 ?>
@@ -311,13 +313,12 @@ session_start();
                 $tailleX = $tailleMAX-4;
                 if($_SESSION['nb']<$tailleX){
                 ?>
-                    <br/>
+                    <br/><br/>
                     <input type="submit" id="suiv" name="suiv" value="suivant"/>
                 <?php
                 }
                 ?>
             </form>
-        </div>
     </body>
 </html>
 <?php
