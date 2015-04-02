@@ -67,61 +67,61 @@ session_start();
                 if($_SESSION['login']==$meow){
                     echo 'Veuillez vous connecter :3';
                 }
-                else{           echo '<nav>';
-                                echo '<ul>';
-                                echo '<li>';
-                                echo '<a class="bouton-action" href="index_pdo.php">Go page de tous les twits</a>';
-                                echo '</li>';
-                                echo '<li>';
-                                echo '<a class="bouton-action" href="page_ret.php">Go page de nos retwits</a>';
-                                echo '</li>';
-                                echo '</ul>';
-                                echo '</nav><br/><br/><br/>';
+                else{           
+                    echo '<nav>';
+                    echo '<ul>';
+                    echo '<li>';
+                    echo '<a class="bouton-action" href="index_pdo.php">Go page de tous les twits</a>';
+                    echo '</li>';
+                    echo '<li>';
+                    echo '<a class="bouton-action" href="page_fav.php">Go page de nos favoris</a>';
+                    echo '</li>';
+                    echo '</ul>';
+                    echo '</nav><br/><br/><br/>';
 
-                $query = 'SELECT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit,origin
-                        FROM users U 
-                        JOIN reltwitusers R ON R.idUser = U.idUser 
-                        JOIN twit T ON T.idTwit = R.idTwit
-                        WHERE retwit = 1
-                        ORDER BY dateTwit DESC';
-                //$tab2 = array('nb1' => $_SESSION['nb'],
-                //       'nb2' => $_SESSION['nb']+5);
-                //var_dump($tab2);
-                $data = $db->prepare($query);
-                $data->execute();
-                $result = $data->fetchAll(PDO::FETCH_ASSOC);
-                //var_dump($result);
-                $taille = count($result);
-                
+                    $query = 'SELECT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit,origin
+                            FROM users U 
+                            JOIN reltwitusers R ON R.idUser = U.idUser 
+                            JOIN twit T ON T.idTwit = R.idTwit
+                            WHERE retwit = 1
+                            ORDER BY dateTwit DESC';
+                    //$tab2 = array('nb1' => $_SESSION['nb'],
+                    //       'nb2' => $_SESSION['nb']+5);
+                    //var_dump($tab2);
+                    $data = $db->prepare($query);
+                    $data->execute();
+                    $result = $data->fetchAll(PDO::FETCH_ASSOC);
+                    //var_dump($result);
+                    $taille = count($result);
+                    
 
-                if($taille==0){
-                    $_SESSION['nb'] = 0;
-                    echo 'PAS DE TWEET DANS LA BASE !';
-                    header('location: index_pdo.php');
-                }
-                else{
-                    for($i=0;$i<$taille;$i++){
-                        if($_SESSION['login']==$result[$i]['loginUser']){
-                            /*$query = 'SELECT loginUser FROM reltwitusers R JOIN users U ON U.idUser = R.idUser WHERE U.idUser = "'.$result[$i]['origin'].'"';
-                            $data = $db->prepare($query);
-                            $data->execute();
-                            $result2 = $data->fetchAll(PDO::FETCH_ASSOC);*/
-                            echo '<article>';
-                            echo '<div id="top-article">';
-                            echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
-                            echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
-                            echo '</div>';
-                            echo '<p>'.$result[$i]['messageTwit'].'...<br/>retwitter par : @'.$result[$i]['loginUser'].'</p>';
-                            
-                            //echo '<p>twit de : '.$result[0]['loginUser'].'</p>';
-                            //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
-                            echo '<a class="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a>';
-                            echo '<a class="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
-                            echo '</article>';
+                    if($taille==0){
+                        $_SESSION['nb'] = 0;
+                        echo 'PAS DE TWEET DANS LA BASE !';
+                        header('location: index_pdo.php');
+                    }
+                    else{
+                        for($i=0;$i<$taille;$i++){
+                            if($_SESSION['login']==$result[$i]['loginUser']){
+                                /*$query = 'SELECT loginUser FROM reltwitusers R JOIN users U ON U.idUser = R.idUser WHERE U.idUser = "'.$result[$i]['origin'].'"';
+                                $data = $db->prepare($query);
+                                $data->execute();
+                                $result2 = $data->fetchAll(PDO::FETCH_ASSOC);*/
+                                echo '<article>';
+                                echo '<div id="top-article">';
+                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                echo '</div>';
+                                echo '<p>'.$result[$i]['messageTwit'].'...<br/>retwitter par : @'.$result[$i]['loginUser'].'</p>';
+                                
+                                //echo '<p>twit de : '.$result[0]['loginUser'].'</p>';
+                                //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
+                                echo '<a class="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a>';
+                                echo '<a class="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
+                                echo '</article>';
+                            }
                         }
                     }
-                }
-
                 }
             ?>
             </div>
