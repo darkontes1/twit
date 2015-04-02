@@ -26,8 +26,8 @@ $(document).on("click", "#deco", function(){
     });
 });
 
-$(document).on("click","#retweet", function(){
-    var idTwit = $("a#aretweet").attr("data-value").value;
+$(document).on("click","#a_retweet", function(){
+    var idTwit = $("#a_retweet").attr("data-value").value;
     alert(idTwit);
     $.ajax({
         method:"GET",
@@ -39,8 +39,8 @@ $(document).on("click","#retweet", function(){
     });
 });
 
-$(document).on("click","#favori", function(){
-    var idTwit = $("a#afavori").attr("data-value").value;
+$(document).on("click","#a_favori", function(){
+    var idTwit = $("#a_favori").attr("data-value").value;
     $.ajax({
         method:"GET",
         url:"index_pdo.php",
