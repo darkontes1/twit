@@ -101,6 +101,7 @@ li{
         font-weight: bold;
     }
 
-    #fav-orange{
+    .fav-orange{
         background: orange;
+        margin-left: 10px;
     }
