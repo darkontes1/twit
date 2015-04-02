@@ -120,7 +120,7 @@ session_start();
     }
 
     //Bouton Favori appuyé
-    if(isset($_GET['action'])){
+    /*if(isset($_GET['action'])){
         $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
         if(isset($_GET['idTwit'])){
             $idT = filter_input(INPUT_GET,'idTwit',FILTER_SANITIZE_NUMBER_INT);
@@ -147,6 +147,28 @@ session_start();
                 }    
             }
         }      
+    }*/
+    if(isset($_GET['action']) && $_GET['action']=="favori"){
+        if(isset($_GET['idTwit'])){
+            $idT = $_GET['idTwit'];
+            $idU = $_SESSION['id'];
+            $query = 'SELECT * FROM favori WHERE idTwit = "'.$idT.'" AND idUser = "'.$idU.'"';
+            $data = $db->prepare($query);
+            $data->execute();
+            $result = $data->fetchAll(PDO::FETCH_ASSOC);
+            if(count($result)>0){
+                $query = 'DELETE FROM favori WHERE idUser = "'.$idU.'" AND idTwit = "'.$idT.'"';
+                $data = $db->prepare($query);
+                $data->execute();
+            }
+            else{
+                $query = 'INSERT INTO favori(idUser, idTwit) VALUES (:idU, :idT)';
+                $tab = array('idU'=>$idU,
+                        'idT'=>$idT);
+                $data = $db->prepare($query);
+                $data->execute($tab);
+            }
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -263,7 +285,8 @@ session_start();
                     header('location: index_pdo.php');
                 }
                 else{
-                    if(isset($_POST['javascript']) && $_POST['javascript']=="oui" ){    
+                    if(isset($_POST['javascript']) && $_POST['javascript']="oui" )
+                    {    
                         for($i=0;$i<$taille;$i++){
                             if($_SESSION['login']==$result[$i]['loginUser']){
                                 echo '<article>';
@@ -301,7 +324,8 @@ session_start();
                             }
                         }                           
                     }
-                    else{
+                    else
+                    {
                         for($i=0;$i<$taille;$i++){
                             if($_SESSION['login']==$result[$i]['loginUser']){
                                 echo '<article>';
@@ -316,15 +340,32 @@ session_start();
                                 echo '</article>';
                             }
                             else{
-                                echo '<a class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+                                echo '<article>';
+                                echo '<div id="top-article">';
+                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                echo '</div>';
+                                echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
+                                //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
+                                echo '<a class="bouton-action" href="index_pdo.php?action=retwit&idTwit='.$result[$i]['idTwit'].'">retwit</a>';
+                                //Si il est favori
+                                $query = 'SELECT * FROM favori WHERE idUser = "'.$_SESSION['id'].'" AND idTwit = "'.$result[$i]['idTwit'].'"';
+                                $data = $db->prepare($query);
+                                $data->execute();
+                                $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
+                                if(count($result2)>0){
+                                    echo '<a class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+                                }
+                                else{
+                                    echo '<a class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+                                }
+                                echo '</article>';
                             }
-                            echo '</article>';
-                        }
+                        }     
                     }
                 }
-            ?> 
-        </div>
-        <form class="prec-suiv" method="post" action="index_pdo.php">
+            ?>
+            <form method="post" action="index_pdo.php">
                 <?php
                 if($_SESSION['nb']!=0){
                 ?>
@@ -334,12 +375,13 @@ session_start();
                 $tailleX = $tailleMAX-4;
                 if($_SESSION['nb']<$tailleX){
                 ?>
-                    <br/><br/>
+                    <br/>
                     <input type="submit" id="suiv" name="suiv" value="suivant"/>
                 <?php
                 }
                 ?>
             </form>
+        </div>
     </body>
 </html>
 <?php
