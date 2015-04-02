@@ -72,8 +72,6 @@ li{
 
 .prec-suiv{
     float: left;
-    top: 0px;
-    right: 0px;
     margin-left: 15px;
     border: 1px solid black;
     padding: 6px;
@@ -106,6 +104,3 @@ li{
         margin-left: 10px;
     }
 
-    .retwit{
-        background: gray;
-    }
