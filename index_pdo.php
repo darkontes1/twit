@@ -231,7 +231,8 @@ session_start();
                             <li><a class="bouton-action" id="page_fav" href="page_fav.php">Go page de nos favoris</a></li><br/>
                         </ul>
                     </nav>
-                <?php//test
+                <?php
+                
                 //var_dump($_SESSION);
                 //Les erreurs en PDO sont des exceptions donc on les gère(On est en POO)
                 /*
