@@ -1,14 +1,15 @@
 //Quand on va cliquer sur le bouton de connexion
 $(document).on("click","#co",function(){
-    var tata = $("#valueCo").val();
+    var valueCo = $("#valueCo").val();
     $.ajax({
         method:"POST",
         url:"index_pdo.php",
         data:{"action":"co",
-            "login":tata
+            "login":valueCo,
+            "javascript":"oui" 
         },
         success:function(r){
-            console.log(eval(r));
+            //console.log(eval(r));
         }
     });
 });
@@ -18,28 +19,36 @@ $(document).on("click", "#deco", function(){
     $.ajax({
         method: "POST",
         url: "index_pdo.php",
-        data: {"action":"deco"},
+        data:{"action":"deco",
+              "javascript":"non"
+            },
         success : function(r){}
     });
 });
 
-$(document).on("click","#retweet", function(){
-    var tata = 
+$(document).on("click","#a_retweet", function(){
+    var idTwit = $("#a_retweet").attr("data-value").value;
+    alert(idTwit);
     $.ajax({
         method:"GET",
         url:"index_pdo.php",
         data:{"action":"retweet",
-            "idTwit":tata
+            "idTwit":idTwit
         },
         success:function(r){}
     });
 });
 
-$(document).on("click","#favori", function(){
+$(document).on("click","#a_favori", function(){
+    var idTwit = $("#a_favori").attr("data-value").value;
     $.ajax({
         method:"GET",
         url:"index_pdo.php",
-        data:{"action":"favori"},
+        data:{"action":"favori",
+            "idTwit":idTwit
+        },
         success:function(r){}
     });
 });
+
+
