@@ -63,6 +63,22 @@ session_start();
         }
     }
 
+    //Bouton de déco est appuyé
+    /*if(isset($_POST['deco'])){
+        $_SESSION['connect'] = FALSE;
+        $_SESSION['login'] = $meow;
+        $_SESSION['nb'] = 0;
+        $_SESSION['message'] = '';
+        $_SESSION['id'] = -1;
+    }*/
+    if(isset($_POST['action']) && $_POST['action']=="deco"){
+        $_SESSION['connect'] = FALSE;
+        $_SESSION['login'] = $meow;
+        $_SESSION['nb'] = 0;
+        $_SESSION['message'] = '';
+        $_SESSION['id'] = -1;
+    }
+
     //Bouton pour ajouter un twit appuyé
     /*if(isset($_POST['ajout'])){
         $idU=$_SESSION['id'];
@@ -91,21 +107,6 @@ session_start();
         $data->execute($tab);      
     }
 
-    //Bouton de déco est appuyé
-    /*if(isset($_POST['deco'])){
-        $_SESSION['connect'] = FALSE;
-        $_SESSION['login'] = $meow;
-        $_SESSION['nb'] = 0;
-        $_SESSION['message'] = '';
-        $_SESSION['id'] = -1;
-    }*/
-    if(isset($_POST['action']) && $_POST['action']=="deco"){
-        $_SESSION['connect'] = FALSE;
-        $_SESSION['login'] = $meow;
-        $_SESSION['nb'] = 0;
-        $_SESSION['message'] = '';
-        $_SESSION['id'] = -1;
-    }
     //Bouton de retweet est appuyé
     /*if(isset($_GET['action'])){
         $action = filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
