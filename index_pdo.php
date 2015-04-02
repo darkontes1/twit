@@ -63,23 +63,6 @@ session_start();
         }
     }
 
-    if(isset($_POST['ajout'])){
-            echo 'test';
-                    $idU=$_SESSION['id'];
-                    $twit = $_POST['ajouttweet'];
-                    $ReqTwit = 'INSERT INTO twit (messageTwit) VALUES (:message)';
-                    $oTwit = $db->prepare($ReqTwit);
-                    $oTwit->bindValue('message', $twit);
-                    $oTwit->execute();
-                    
-                    $query = 'INSERT INTO reltwitusers(idUser,idTwit) VALUES (:idU,:idT)';
-                    $tab = array('idU'=>$idU,
-                        'idT'=>$db->lastInsertId());
-                    $data = $db->prepare($query);
-                    $data->execute($tab);
-                    
-        }
-
     //Bouton de déco est appuyé
     /*if(isset($_POST['deco'])){
         $_SESSION['connect'] = FALSE;
