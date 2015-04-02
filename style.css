@@ -70,14 +70,14 @@ li{
     margin-left: 10px;
 }
 
-.prec-suiv{
+/*.prec-suiv{
     float: left;
     margin-left: 15px;
     border: 1px solid black;
     padding: 6px;
     border-radius: 6px;
     background: skyblue;
-}
+}*/
 
     #suiv{
         width: 80px;
@@ -87,6 +87,7 @@ li{
         background: white;
         border:1px solid black;
         font-weight: bold;
+        margin-left: 15px;
     }
 
     #prec{
@@ -97,6 +98,7 @@ li{
         background: white;
         border:1px solid black;
         font-weight: bold;
+        margin-left: 15px;
     }
 
     .fav-orange{
