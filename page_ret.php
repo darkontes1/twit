@@ -1,4 +1,6 @@
 <?php
+//session_start();
+//session_destroy();
 session_start();
     $meow = 'Meow_kitty_cat';
     if(empty($_SESSION)){  //Préférer utiliser empty plutôt que isset pour les session car un session_start déclare une fonction directement
@@ -18,9 +20,8 @@ session_start();
        exit();
     }
 
-    //var_dump($_SESSION);
     //Bouton de connection est appuyé
-    if(isset($_POST['co'])){
+    /*if(isset($_POST['co'])){
         $login = filter_input(INPUT_POST,'valueCo',FILTER_SANITIZE_STRING);
         $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
         $data = $db->prepare($query);
@@ -31,9 +32,29 @@ session_start();
             $_SESSION['login'] = $login;
             $_SESSION['id'] = (int)$result[0]['idUser'];
         }
+    }*/
+    if(isset($_POST['action']) && $_POST['action']=="co"){
+        $login = $_POST['login'];
+        $query = 'SELECT * FROM users WHERE loginUser = "'.$login.'"';
+        $data = $db->prepare($query);
+        $data->execute();
+        $result = $data->fetchAll(PDO::FETCH_ASSOC);
+        if(count($result)>0){
+            $_SESSION['connect'] = TRUE;
+            $_SESSION['login'] = $login;
+            $_SESSION['id'] = (int)$result[0]['idUser'];
+        }
     }
+
     //Bouton de déco est appuyé
-    if(isset($_POST['deco'])){
+    /*if(isset($_POST['deco'])){
+        $_SESSION['connect'] = FALSE;
+        $_SESSION['login'] = $meow;
+        $_SESSION['nb'] = 0;
+        $_SESSION['message'] = '';
+        $_SESSION['id'] = -1;
+    }*/
+    if(isset($_POST['action']) && $_POST['action']=="deco"){
         $_SESSION['connect'] = FALSE;
         $_SESSION['login'] = $meow;
         $_SESSION['nb'] = 0;
