@@ -263,6 +263,7 @@ session_start();
                     header('location: index_pdo.php');
                 }
                 else{
+<<<<<<< HEAD
                     for($i=0;$i<$taille;$i++){
                         if($_SESSION['login']==$result[$i]['loginUser']){
                             echo '<article>';
@@ -292,6 +293,59 @@ session_start();
                             $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
                             if(count($result2)>0){
                                 echo '<a class="fav-orange" class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
+=======
+                    if(isset($_POST['javascript']) && $_POST['javascript']=="oui" ){    
+                        for($i=0;$i<$taille;$i++){
+                            if($_SESSION['login']==$result[$i]['loginUser']){
+                                echo '<article>';
+                                echo '<div id="top-article">';
+                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                echo '</div>';
+                                echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
+                                //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
+                                echo '<a class="bouton-action" href="index_pdo.php" id="a_modifier" data-value="'.$result[$i]['idTwit'].'"">modifier</a>';
+                                echo '<a class="bouton-action" href="index_pdo.php" id="a_supprimer" data-value="'.$result[$i]['idTwit'].'"">supprimer</a>';
+                                echo '</article>';
+                            }
+                            else{
+                                echo '<article>';
+                                echo '<div id="top-article">';
+                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                echo '</div>';
+                                echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
+                                //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
+                                echo '<a class="bouton-action" href="index_pdo.php id="a_retwit" data-value="'.$result[$i]['idTwit'].'">retwit</a>';
+                                //Si il est favori
+                                $query = 'SELECT * FROM favori WHERE idUser = "'.$_SESSION['id'].'" AND idTwit = "'.$result[$i]['idTwit'].'"';
+                                $data = $db->prepare($query);
+                                $data->execute();
+                                $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
+                                if(count($result2)>0){
+                                    echo '<a class="bouton-action" href="index_pdo.php id="a_favori" data-value="'.$result[$i]['idTwit'].'">favori</a>';
+                                }
+                                else{
+                                    echo '<a class="bouton-action" href="index_pdo.php id="a_favori" data-value="'.$result[$i]['idTwit'].'">favori</a>';
+                                }
+                                echo '</article>';
+                            }
+                        }                           
+                    }
+                    else{
+                        for($i=0;$i<$taille;$i++){
+                            if($_SESSION['login']==$result[$i]['loginUser']){
+                                echo '<article>';
+                                echo '<div id="top-article">';
+                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                echo '</div>';
+                                echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'</p>';
+                                //IMPORTANT !!! syntaxe d'un get à la place de faire un form pour une action
+                                echo '<a class="bouton-action" href="index_pdo.php?action=modifier&idTwit='.$result[$i]['idTwit'].'">modifier</a>';
+                                echo '<a class="bouton-action" href="index_pdo.php?action=supprimer&idTwit='.$result[$i]['idTwit'].'">supprimer</a>';
+                                echo '</article>';
+>>>>>>> origin/master
                             }
                             else{
                                 echo '<a class="bouton-action" href="index_pdo.php?action=favori&idTwit='.$result[$i]['idTwit'].'">favori</a>';
@@ -300,8 +354,7 @@ session_start();
                         }
                     }
                 }
-            ?>
-            
+            ?> 
         </div>
         <form class="prec-suiv" method="post" action="index_pdo.php">
                 <?php
