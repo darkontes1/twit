@@ -79,46 +79,45 @@
                     echo '</ul>';
                     echo '</nav><br/><br/><br/>';
 
-                $query = 'SELECT DISTINCT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit,origin
-                        FROM users U 
-                        JOIN reltwitusers R ON R.idUser = U.idUser 
-                        JOIN twit T ON T.idTwit = R.idTwit
-                        JOIN favori F ON F.idUser = U.idUser
-                        ORDER BY dateTwit DESC';
-                //$tab2 = array('nb1' => $_SESSION['nb'],
-                //       'nb2' => $_SESSION['nb']+5);
-                //var_dump($tab2);
-                $data = $db->prepare($query);
-                $data->execute();
-                $result = $data->fetchAll(PDO::FETCH_ASSOC);
-                //var_dump($result);
-                $taille = count($result);
+                    $query = 'SELECT DISTINCT T.idTwit,loginUser,nomUser,SUBSTRING(messageTwit,1,20) AS messageTwit,dateTwit,origin
+                            FROM users U 
+                            JOIN reltwitusers R ON R.idUser = U.idUser 
+                            JOIN twit T ON T.idTwit = R.idTwit
+                            JOIN favori F ON F.idUser = U.idUser
+                            ORDER BY dateTwit DESC';
+                    //$tab2 = array('nb1' => $_SESSION['nb'],
+                    //       'nb2' => $_SESSION['nb']+5);
+                    //var_dump($tab2);
+                    $data = $db->prepare($query);
+                    $data->execute();
+                    $result = $data->fetchAll(PDO::FETCH_ASSOC);
+                    //var_dump($result);
+                    $taille = count($result);
 
-                if($taille==0){
-                    $_SESSION['nb'] = 0;
-                    echo 'PAS DE TWEET DANS LA BASE !';
-                    header('location: index_pdo.php');
-                }
-                else{
-                    for($i=0;$i<$taille;$i++){
-                        if($_SESSION['login']==$result[$i]['loginUser']){
-                            $query = 'SELECT * FROM favori WHERE idUser = "'.$_SESSION['id'].'" AND idTwit = "'.$result[$i]['idTwit'].'"';
-                            $data = $db->prepare($query);
-                            $data->execute();
-                            $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
-                            if(count($result2)>0){
-                                echo '<article>';
-                                echo '<div id="top-article">';
-                                echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
-                                echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
-                                echo '</div>';
-                                echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'-'.$result[$i]['idTwit'].'</p>';
-                                echo '</article>';
+                    if($taille==0){
+                        $_SESSION['nb'] = 0;
+                        echo 'PAS DE TWEET DANS LA BASE !';
+                        header('location: index_pdo.php');
+                    }
+                    else{
+                        for($i=0;$i<$taille;$i++){
+                            if($_SESSION['login']==$result[$i]['loginUser']){
+                                $query = 'SELECT * FROM favori WHERE idUser = "'.$_SESSION['id'].'" AND idTwit = "'.$result[$i]['idTwit'].'"';
+                                $data = $db->prepare($query);
+                                $data->execute();
+                                $result2 = $data->fetchAll(PDO::FETCH_ASSOC);
+                                if(count($result2)>0){
+                                    echo '<article>';
+                                    echo '<div id="top-article">';
+                                    echo '<p><b>'.date('j-m-y',strtotime($result[$i]['dateTwit'])).'</b>';
+                                    echo '<br/>'.date('H:i:s',strtotime($result[$i]['dateTwit'])).'</p>';
+                                    echo '</div>';
+                                    echo '<p>'.$result[$i]['messageTwit'].'...<br/>@'.$result[$i]['loginUser'].'-'.$result[$i]['idTwit'].'</p>';
+                                    echo '</article>';
+                                }
                             }
                         }
                     }
-                }
-
                 }
             ?>
         </div>
